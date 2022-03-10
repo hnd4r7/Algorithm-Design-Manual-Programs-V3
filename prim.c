@@ -57,17 +57,17 @@ int prim(graph *g, int start) {
             printf("edge (%d,%d) in tree \n",parent[v],v);
             weight = weight + dist;
         }
-        p = g->edges[v];
+        p = g->edges[v]; //vertex v
         while (p != NULL) {
-            w = p->y;
+            w = p->y;  // calculate distance from v->w. find the minimum.
             if ((distance[w] > p->weight) && (!intree[w])) {
-                distance[w] = p->weight;
+                distance[w] = p->weight; // update distance
                 parent[w] = v;
             }
-            p = p->next;
+            p = p->next; // get edges of that vertex
         }
 
-        dist = MAXINT;
+        dist = MAXINT;   // find the next nearest vertex to add to the tree
         for (i = 1; i <= g->nvertices; i++) {
             if ((!intree[i]) && (dist > distance[i])) {
                 dist = distance[i];
